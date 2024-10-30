@@ -1,10 +1,7 @@
-package ru.gorohov.eventnotificator.api;
+package ru.gorohov.eventnotificator.api.dto;
 
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
-import ru.gorohov.eventnotificator.repository.EventChangeEntity;
-import ru.gorohov.eventnotificator.repository.EventNotificationEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -4,13 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gorohov.InfoOfEditedEvent;
-import ru.gorohov.eventnotificator.EventNotificationConvector;
-import ru.gorohov.eventnotificator.api.NotificationDto;
-import ru.gorohov.eventnotificator.repository.*;
+import ru.gorohov.eventnotificator.kafka.message.InfoOfEditedEvent;
+import ru.gorohov.eventnotificator.utils.EventNotificationConvector;
+import ru.gorohov.eventnotificator.api.dto.NotificationDto;
+import ru.gorohov.eventnotificator.db.entity.EventChangeEntity;
+import ru.gorohov.eventnotificator.db.entity.EventChangesBatchEntity;
+import ru.gorohov.eventnotificator.db.entity.EventNotificationEntity;
+import ru.gorohov.eventnotificator.db.repository.EventChangeBatchRepository;
+import ru.gorohov.eventnotificator.db.repository.EventChangesRepository;
+import ru.gorohov.eventnotificator.db.repository.EventNotificationRepository;
 import ru.gorohov.eventnotificator.secured.GetCurrentUserService;
 
-import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +62,7 @@ public class NotificationService {
                     );
                 });
         eventChangesBatch.setNotifications(eventNotificationEntities);
-
+        log.info("Added new notification from kafka");
         eventChangesRepository.saveAll(changes);
         eventNotificationRepository.saveAll(eventNotificationEntities);
 
@@ -79,13 +83,12 @@ public class NotificationService {
                                 .map(eventNotificationConvector::fromEntityChangeToDto).toList())
                         .build())
                 .toList();
-
+        log.info("Getting unread notifications for current user: {}", foundedUnreadNotify);
         return unreadNotifications;
     }
 
     @Transactional
     public void readNotificationsForCurrentUser(List<Long> notificationIdsToMark) {
-
 
         var foundedUnreadNotifyIds = getUnreadNotificationsEntitiesForCurrentUser()
                 .stream()
@@ -95,7 +98,7 @@ public class NotificationService {
         List<Long> idsToUpdate = notificationIdsToMark.stream()
                 .filter(foundedUnreadNotifyIds::contains)
                 .collect(Collectors.toList());
-
+        log.info("Trying marking unread notifications for current user: {}", idsToUpdate);
         if (!idsToUpdate.isEmpty()) {
             eventNotificationRepository.updateIsReadByIds(idsToUpdate, true);
         }

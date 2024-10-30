@@ -79,7 +79,6 @@ public class SecurityConfig {
                 );
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -90,16 +89,13 @@ public class SecurityConfig {
                         .accessDeniedHandler(customAccessDeniedHandler))
                 .authorizeHttpRequests(authorizeHttpRequests ->
                         authorizeHttpRequests
-                                //.requestMatchers(HttpMethod.GET, "/notifications").hasAnyAuthority("USER", "ADMIN")
-                                //.requestMatchers(HttpMethod.POST, "/notifications").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/notifications").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/notifications").hasAnyAuthority("USER", "ADMIN")
 
                                 .anyRequest().authenticated()
 
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
-
     }
-
 }

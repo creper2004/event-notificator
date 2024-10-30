@@ -1,8 +1,9 @@
-package ru.gorohov.eventnotificator.repository;
+package ru.gorohov.eventnotificator.db.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import ru.gorohov.eventnotificator.db.entity.EventChangesBatchEntity;
 
 public interface EventChangeBatchRepository extends JpaRepository<EventChangesBatchEntity, Long> {
 

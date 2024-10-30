@@ -1,4 +1,4 @@
-package ru.gorohov.eventnotificator.kafka;
+package ru.gorohov.eventnotificator.kafka.config;
 
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
@@ -11,7 +11,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import ru.gorohov.InfoOfEditedEvent;
+import ru.gorohov.eventnotificator.kafka.message.InfoOfEditedEvent;
 
 import java.util.HashMap;
 import java.util.Map;

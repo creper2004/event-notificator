@@ -1,10 +1,10 @@
-package ru.gorohov.eventnotificator.kafka;
+package ru.gorohov.eventnotificator.kafka.consumer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import ru.gorohov.InfoOfEditedEvent;
+import ru.gorohov.eventnotificator.kafka.message.InfoOfEditedEvent;
 import ru.gorohov.eventnotificator.domain.NotificationService;
 
 @Component

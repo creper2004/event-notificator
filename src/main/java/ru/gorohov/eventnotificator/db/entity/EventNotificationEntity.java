@@ -1,4 +1,4 @@
-package ru.gorohov.eventnotificator.repository;
+package ru.gorohov.eventnotificator.db.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,27 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "event_change")
+@Table(name = "event_notification")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventChangeEntity {
+public class EventNotificationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "field_name", nullable = false)
-    private String fieldName;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Column(name = "old_value")
-    private String oldValue;
-
-    @Column(name = "new_value")
-    private String newValue;
+    @Column(name = "is_read", nullable = false)
+    private Boolean isRead;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "change_batch_id", nullable = false)
+    @JoinColumn(name = "change_batch_id", referencedColumnName = "id", nullable = false)
     private EventChangesBatchEntity changesBatch;
 }

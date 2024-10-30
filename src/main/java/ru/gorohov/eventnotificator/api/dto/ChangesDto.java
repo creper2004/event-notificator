@@ -1,6 +1,5 @@
-package ru.gorohov.eventnotificator.api;
+package ru.gorohov.eventnotificator.api.dto;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
 

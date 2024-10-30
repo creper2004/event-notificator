@@ -1,12 +1,12 @@
-package ru.gorohov.eventnotificator;
+package ru.gorohov.eventnotificator.utils;
 
 import org.springframework.stereotype.Component;
-import ru.gorohov.HistoryOfFields;
-import ru.gorohov.InfoOfEditedEvent;
-import ru.gorohov.eventnotificator.api.ChangesDto;
-import ru.gorohov.eventnotificator.api.NotificationDto;
-import ru.gorohov.eventnotificator.repository.EventChangeEntity;
-import ru.gorohov.eventnotificator.repository.EventChangesBatchEntity;
+import ru.gorohov.eventnotificator.kafka.message.HistoryOfFields;
+import ru.gorohov.eventnotificator.kafka.message.InfoOfEditedEvent;
+import ru.gorohov.eventnotificator.api.dto.ChangesDto;
+import ru.gorohov.eventnotificator.api.dto.NotificationDto;
+import ru.gorohov.eventnotificator.db.entity.EventChangeEntity;
+import ru.gorohov.eventnotificator.db.entity.EventChangesBatchEntity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class EventNotificationConvector {
 
     public NotificationDto fromEntityBatchToDto(EventChangesBatchEntity eventChangesBatchEntity) {
         return NotificationDto.builder()
-                .notificationId(eventChangesBatchEntity.getId()) //todo
+                .notificationId(eventChangesBatchEntity.getId())
                 .eventId(eventChangesBatchEntity.getEventId())
                 .ownerId(eventChangesBatchEntity.getOwnerId())
                 .timestamp(eventChangesBatchEntity.getTimestamp())

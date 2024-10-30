@@ -1,4 +1,4 @@
-package ru.gorohov.eventnotificator.api;
+package ru.gorohov.eventnotificator.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

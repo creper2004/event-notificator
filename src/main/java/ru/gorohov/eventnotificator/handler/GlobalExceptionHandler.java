@@ -1,4 +1,4 @@
-package ru.gorohov.eventnotificator;
+package ru.gorohov.eventnotificator.handler;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;

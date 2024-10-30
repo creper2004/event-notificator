@@ -32,6 +32,7 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.debug("Loading user by username: {}", username);
         try {
             var userDomain = getUserByLogin(username);
             return UserSecurity.builder()
